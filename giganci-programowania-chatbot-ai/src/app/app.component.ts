@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { ChatItem } from './model/chat-item.model';
 import { ChatItemType } from './model/chat-item-type.model';
+import { ThumbType } from './model/thumb-type.model';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent {
   chatItems: ChatItem[] = [];
   
   ChatItemType = ChatItemType;
+  ThumbType = ThumbType;
 
   askQuestion(questionText: string) {
     const question = new ChatItem();
