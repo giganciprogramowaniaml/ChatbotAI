@@ -12,12 +12,12 @@ main {
         article {
             margin-bottom: 16px;
 
-            &:nth-child(odd), .question {
-                margin-right: 64px
+            .question {
+                margin-right: 128px
             }
 
-            &:nth-child(even), .answear {
-                margin-left: 64px
+            .answear {
+                margin-left: 128px
             }
 
             .question, .answear {
