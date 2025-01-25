@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { ChatItem } from './model/chat-item.model';
 import { ChatItemType } from './model/chat-item-type.model';
 import { ThumbType } from './model/thumb-type.model';
+import { LoremIpsumGeneratorService } from './services/lorem-ipsum-generator.service';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,8 @@ import { ThumbType } from './model/thumb-type.model';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+  loremIpsumGenerator = inject(LoremIpsumGeneratorService);
+  
   chatItems: ChatItem[] = [];
   
   ChatItemType = ChatItemType;
@@ -30,7 +33,7 @@ export class AppComponent {
     this.chatItems.push(question);
     
     const answear = new ChatItem();
-    answear.text = "Lorem ipsum";
+    answear.text = this.loremIpsumGenerator.generateSentences();
     answear.userName = "ChatBot AI";
     answear.type = ChatItemType.Answear;
     answear.avatar = "ai.jpg";
