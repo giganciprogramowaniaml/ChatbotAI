@@ -18,9 +18,7 @@ export class LoremIpsumGeneratorService {
 
   generateSentences() {
     const randomNumberFrom1To10 = Math.ceil(Math.random()*10);
-
     const loremIpsumText = this.loremIpsumGenerator.generateSentences(randomNumberFrom1To10);
-
     return loremIpsumText;
   }
 

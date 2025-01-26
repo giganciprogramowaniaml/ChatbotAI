@@ -36,5 +36,8 @@
     <button mat-icon-button class="button" (click)="askQuestion(askQuestionButton.value)">
       <mat-icon>send</mat-icon>
     </button>
+    <button mat-icon-button class="button" (click)="cancelAnswearGeneration$.next(null)">
+      <mat-icon>cancel</mat-icon>
+    </button>
   </section>
 </main>
