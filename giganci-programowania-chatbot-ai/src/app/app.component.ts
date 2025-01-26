@@ -9,12 +9,12 @@ import { ChatItem } from './model/chat-item.model';
 import { ChatItemType } from './model/chat-item-type.model';
 import { ThumbType } from './model/thumb-type.model';
 import { LoremIpsumGeneratorService } from './services/lorem-ipsum-generator.service';
-import { interval, map, of, Subject, take, takeUntil } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { finalize, interval, map, of, Subject, take, takeUntil } from 'rxjs';
+import { AsyncPipe, CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [ FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatCardModule, AsyncPipe],
+  imports: [ CommonModule, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatCardModule, AsyncPipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -26,10 +26,9 @@ export class AppComponent {
   
   ChatItemType = ChatItemType;
   ThumbType = ThumbType;
+  isAnswearTextGenerationInProgress = false;
 
   askQuestion(questionText: string) {
-    this.cancelAnswearGeneration$.next(null);
-
     this.addQuestion(questionText);
     this.addAnswear();
   }
@@ -44,12 +43,14 @@ export class AppComponent {
   }
 
   private addAnswear() {
+    this.isAnswearTextGenerationInProgress = true;    
     const answearText = this.loremIpsumGenerator.generateSentences();
     const answear = new ChatItem();
     answear.text = interval(50).pipe(
       map(x => answearText.substr(0, x + 1)),
       take(answearText.length),
       takeUntil(this.cancelAnswearGeneration$),
+      finalize(() => this.isAnswearTextGenerationInProgress = false)
     );
     answear.userName = "ChatBot AI";
     answear.type = ChatItemType.Answear;

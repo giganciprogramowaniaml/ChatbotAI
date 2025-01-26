@@ -33,10 +33,10 @@
       <mat-label>Zapytaj AI</mat-label>
       <textarea matInput #askQuestionButton></textarea>
     </mat-form-field>
-    <button mat-icon-button class="button" (click)="askQuestion(askQuestionButton.value)">
+    <button mat-icon-button class="button" (click)="askQuestion(askQuestionButton.value)" *ngIf="!isAnswearTextGenerationInProgress">
       <mat-icon>send</mat-icon>
     </button>
-    <button mat-icon-button class="button" (click)="cancelAnswearGeneration$.next(null)">
+    <button mat-icon-button class="button" (click)="cancelAnswearGeneration$.next(null)" *ngIf="isAnswearTextGenerationInProgress">
       <mat-icon>cancel</mat-icon>
     </button>
   </section>
