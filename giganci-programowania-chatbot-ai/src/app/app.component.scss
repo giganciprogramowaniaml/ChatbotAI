@@ -3,7 +3,9 @@ main {
     flex-direction: column;
     justify-content: space-between;
     max-height: 100vh;
+    max-height: 100dvh;
     height: 100vh;
+    height: 100dvh;
 
     .chat {
         overflow-y: auto;
